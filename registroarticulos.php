@@ -135,7 +135,7 @@ if (isset($_SESSION["usuario"])) {
                             <div id="contenedor" class="container mt-12">
                                 <div class="row">
                                     <div class="container mt-5 text-center">
-                                        <form action="registroarticulosadministrador.php" method="get">
+                                        <form action="registroarticulos.php" method="get">
                                             <div class="acciones d-flex justify-content-between mt-5">
                                                 <div id="botonAgregar">
                                                     <a class="get-started-btn scrollto" style="color: black;"
