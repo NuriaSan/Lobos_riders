@@ -65,6 +65,7 @@ $mensajeEliminado = isset($_GET['mensaje']) && $_GET['mensaje'] === 'eliminado';
                                     echo "<table border='0' style= 'width:100%; background-color:#3282b8; align-items: center; text-align:center;'>";
                                     echo "<tr>
                                             <th style='background-color:grey; font-size: 16px; height: 30px;'>Codigo</th>
+                                            <th style='background-color:grey; font-size: 16px; height: 30px;'>Codigo Articulo</th>
                                             <th style='background-color:grey; font-size: 16px; height: 30px;'>Nombre</th>
                                             <th style='background-color:grey; font-size: 16px; height: 30px;'>Descripción</th>
                                             <th style='background-color:grey; font-size: 16px; height: 30px;'>Categoria</th>
@@ -74,6 +75,7 @@ $mensajeEliminado = isset($_GET['mensaje']) && $_GET['mensaje'] === 'eliminado';
                                         </tr>";
                                     echo "<tr>";
                                     echo "<td style='background-color:white; font-size: 16px; height: 30px;'>{$cod_articulospedido}</td>";
+                                    echo "<td style='background-color:white; font-size: 16px; height: 30px;'>{$articulo->getCod_articulo()}</td>";
                                     echo "<td style='background-color:white; font-size: 16px; height: 30px;'>{$articulo->getNombre()}</td>";
                                     echo "<td style='background-color:white; font-size: 16px; height: 30px;'>{$articulo->getDescripcion()}</td>";
                                     echo "<td style='background-color:white; font-size: 16px; height: 30px;'>{$articulo->getCategoria()}</td>";

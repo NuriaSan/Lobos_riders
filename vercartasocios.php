@@ -51,7 +51,7 @@ if (isset($_SESSION['carrito'])) {
                     M.G<span>.</span></a></h1>
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
-                    <li><a href="modificarusuariosocio.php" >Modificar Usuario</a></li>
+                    <li><a href="modificarusuariosocio.php">Modificar Usuario</a></li>
                     <li><a href="peticionmerchandisingsocio.php">Solicitar Merchandising</a></li>
                 </ul>
             </nav>
@@ -115,7 +115,7 @@ if (isset($_SESSION['carrito'])) {
                                             $conn = conectar_DB();
 
                                             if (isset($_GET['cod_articulo']) && isset($_GET['cantidad']) && isset($_GET['talla']) && isset($_GET['genero']) && isset($_GET['tipo_prenda'])) {
-                                                $codigo_articulo = $_GET['cod_articulo'];
+                                                $cod_articulo = $_GET['cod_articulo'];
                                                 $cantidad = $_GET['cantidad'];
                                                 $talla = $_GET['talla'];
                                                 $genero = $_GET['genero'];
@@ -127,7 +127,7 @@ if (isset($_SESSION['carrito'])) {
 
                                                 if (isset($_GET['cod_articulo']) || isset($_GET['codigo_articulo'])) {
 
-                                                    $articulo = Articulo::obtenerArticuloPorCodigo($codigo_articulo);
+                                                    $articulo = Articulo::obtenerArticuloPorCodigo($cod_articulo);
                                                     $_SESSION['carrito'][] = $articulo;
 
 
@@ -150,7 +150,7 @@ if (isset($_SESSION['carrito'])) {
                                                                 // Insertar los artículos en la tabla articulos_pedido
                                                                 $fecha_creacion = date('Y-m-d H:i:s');
                                                                 $codigo_articulo;
-                                                                $cod_articulospedido = $fecha_creacion ."-" . $codigo_articulo;
+                                                                $cod_articulospedido = $fecha_creacion . "-" . $codigo_articulo;
                                                                 $nombre = $articulo->getNombre();
                                                                 $precio = $articulo->getPrecio();
                                                                 $talla = isset($_GET['talla']) ? $_GET['talla'] : '';
@@ -160,17 +160,19 @@ if (isset($_SESSION['carrito'])) {
 
 
                                                                 // Preparar la consulta SQL
-                                                                $sql = "INSERT INTO articulos_pedido (cod_articulospedido, nombre, precio, talla, genero, tipo_prenda, cliente) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                                                                $sql = "INSERT INTO articulos_pedido (cod_articulospedido, cod_articulo, nombre, precio, talla, genero, tipo_prenda, cod_pedido, cliente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
                                                                 $stmt = $conn->prepare($sql);
 
                                                                 // Enlazar parámetros
                                                                 $stmt->bindParam(1, $cod_articulospedido, PDO::PARAM_STR);
-                                                                $stmt->bindParam(2, $nombre, PDO::PARAM_STR);
-                                                                $stmt->bindParam(3, $precio, PDO::PARAM_STR);
-                                                                $stmt->bindParam(4, $talla, PDO::PARAM_STR);
-                                                                $stmt->bindParam(5, $genero, PDO::PARAM_STR);
-                                                                $stmt->bindParam(6, $tipo_prenda, PDO::PARAM_STR);
-                                                                $stmt->bindParam(7, $dni, PDO::PARAM_STR);
+                                                                $stmt->bindParam(2, $cod_articulo, PDO::PARAM_STR);
+                                                                $stmt->bindParam(3, $nombre, PDO::PARAM_STR);
+                                                                $stmt->bindParam(4, $precio, PDO::PARAM_STR);
+                                                                $stmt->bindParam(5, $talla, PDO::PARAM_STR);
+                                                                $stmt->bindParam(6, $genero, PDO::PARAM_STR);
+                                                                $stmt->bindParam(7, $tipo_prenda, PDO::PARAM_STR);
+                                                                $stmt->bindParam(8, $cod_pedido, PDO::PARAM_STR);
+                                                                $stmt->bindParam(9, $dni, PDO::PARAM_STR);
 
 
 
@@ -267,11 +269,13 @@ if (isset($_SESSION['carrito'])) {
                                                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                                         $datos_pedido[] = array(
                                                             'cod_articulospedido' => $row['cod_articulospedido'],
+                                                            'cod_articulo' => $row['cod_articulo'],
                                                             'nombre' => $row['nombre'],
                                                             'precio' => $row['precio'],
                                                             'talla' => $row['talla'],
                                                             'genero' => $row['genero'],
                                                             'tipo_prenda' => $row['tipo_prenda'],
+                                                            'cod_pedido' => $row['cod_pedido'],
                                                             'cliente' => $row['cliente'],
                                                         );
                                                     }
@@ -281,16 +285,16 @@ if (isset($_SESSION['carrito'])) {
 
                                                 }
                                                 if (!empty($cod_pedido)) {
-                                    //Obtener cod_pedido del array
-                                    foreach ($cod_pedido as $pedido) {
-                                        // Accede al valor de 'cod_pedido' y guárdalo en una variable
-                                        $cod_pedido = $pedido['cod_pedido'];
-                                        // Muestra el valor de 'cod_pedido'
-                                        echo "<h3>El siguiente pedido con codigo $cod_pedido: En Proceso. </h3>";
-                                    }
-                                }else {
-                                    echo '<td class="text-center"><a href="solicitudsocio.php" class="btn btn-dark btn-block">Gestionar Pedido <i class="glyphicon glyphicon-menu-right"></i></a></td>';
-                                }
+                                                    //Obtener cod_pedido del array
+                                                    foreach ($cod_pedido as $pedido) {
+                                                        // Accede al valor de 'cod_pedido' y guárdalo en una variable
+                                                        $cod_pedido = $pedido['cod_pedido'];
+                                                        // Muestra el valor de 'cod_pedido'
+                                                        echo "<h3>El siguiente pedido con codigo $cod_pedido: En Proceso. </h3>";
+                                                    }
+                                                } else {
+                                                    echo '<td class="text-center"><a href="solicitudsocio.php" class="btn btn-dark btn-block">Gestionar Pedido <i class="glyphicon glyphicon-menu-right"></i></a></td>';
+                                                }
                                                 ?>
                                             </tr>
                                         </tfoot>
@@ -298,9 +302,9 @@ if (isset($_SESSION['carrito'])) {
                                 </div>
                                 <div class="panel-footer">
                                     <?php if (!empty($datos_pedido)) {
-                                        echo '<a href="peticionmerchandising.php" class="btn btn-secondary"><i class="glyphicon glyphicon-menu-left"></i> Volver a la Tienda</a>';
+                                        echo '<a href="peticionmerchandisingsocio.php" class="btn btn-secondary"><i class="glyphicon glyphicon-menu-left"></i> Volver a la Tienda</a>';
                                     } else {
-                                        echo '<a href="peticionmerchandising.php" class="btn btn-secondary"><i class="glyphicon glyphicon-menu-left"></i> Seguir Comprando</a>';
+                                        echo '<a href="peticionmerchandisingsocio.php" class="btn btn-secondary"><i class="glyphicon glyphicon-menu-left"></i> Seguir Comprando</a>';
                                     }
                                     ?>
                                 </div>

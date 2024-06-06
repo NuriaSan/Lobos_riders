@@ -48,12 +48,14 @@ if (isset($_SESSION['carrito'])) {
                     class="img-fluid"></a>
             <h1 class="logo me-auto me-lg-0"><a href="index.html"><span>L</span>obos <span>R</span>iders
                     M.G<span>.</span></a></h1>
-            <nav id="navbar" class="navbar order-last order-lg-0">
+                    <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
-                    <li><a href="eliminarusuario.php">Eliminar Datos</a></li>
-                    <li><a href="modificarusuario.php">Modificar Usuario</a></li>
+                    <li><a href="eliminarusuario.php" >Eliminar Datos</a></li>
+                    <li><a href="modificarusuario.php" >Modificar Usuario</a></li>
                     <li><a href="peticionmerchandising.php">Solicitar Merchandising</a></li>
+                    <li><a href="consultapedidosusuario.php">Consultar pedidos</a></li>
                 </ul>
+
             </nav>
             <a href="logout.php" class="get-started-btn scrollto">Log Out</a>
         </div>

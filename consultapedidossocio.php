@@ -5,7 +5,6 @@ include ("claseArticulo.php");
 session_start();
 include_once ("funciones-comunes.php");
 
-
 include ("seguridad.php");
 
 // Comprobar si está autentificado
@@ -68,7 +67,7 @@ $mensajeExito = isset($_GET['mensaje']) && $_GET['mensaje'] === 'exito';
 
     <!-- Google Fonts -->
     <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i"
         rel="stylesheet">
 
     <!-- Vendor CSS Files -->
@@ -122,7 +121,7 @@ $mensajeExito = isset($_GET['mensaje']) && $_GET['mensaje'] === 'exito';
 
                 </div>
                 <div class="titulo">
-                    <h1 style="color: orange;">Bienvenido a tu Espacio de Administrador <?php echo $nombre; ?></h1>
+                    <h1 style="color: orange;">Bienvenido a tu Espacio de Socio <?php echo $nombre; ?></h1>
                 </div>
 
                 <div id="formularioad" class="container mt-4">
@@ -140,10 +139,7 @@ $mensajeExito = isset($_GET['mensaje']) && $_GET['mensaje'] === 'exito';
                                         <th scope="col">Género</th>
                                         <th scope="col">Tipo de Prenda</th>
                                         <th scope="col">Cliente</th>
-                                        <th scope="col">Admin</th>
-                                        <th scope="col">Socio</th>
-                                        <th scope="col">Modificar</th>
-                                        <th scope="col">Borrar</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -160,12 +156,9 @@ $mensajeExito = isset($_GET['mensaje']) && $_GET['mensaje'] === 'exito';
                                         die("Error al conectar a la base de datos");
                                     }
                                     try {
-                                        // Consulta para obtener los clientes
-                                    
-                                        $stmt = $conn->prepare("SELECT ap.*, u.admin, u.socio
-                                        FROM articulos_pedido ap
-                                        JOIN usuarios u ON ap.cliente = u.dni
-                                        ");
+                                        // Consulta para obtener los artículos pedidos por el cliente actual
+                                        $stmt = $conn->prepare("SELECT * FROM articulos_pedido WHERE cliente = :dni");
+                                        $stmt->bindParam(':dni', $dni);
                                         $stmt->execute();
 
                                         while ($datos = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -178,13 +171,6 @@ $mensajeExito = isset($_GET['mensaje']) && $_GET['mensaje'] === 'exito';
                                             echo "<td>" . $datos["genero"] . "</td>";
                                             echo "<td>" . $datos["tipo_prenda"] . "</td>";
                                             echo "<td>" . $datos["cliente"] . "</td>";
-                                            // Obtener si o no como respuesta de los campos admin y socio
-                                            $adminText = ($datos["admin"] == 1) ? 'Sí' : 'No';
-                                            $socioText = ($datos["socio"] == 1) ? 'Sí' : 'No';
-                                            echo "<td>" . $adminText . "</td>";
-                                            echo "<td>" . $socioText . "</td>";
-                                            echo "<td><a href='articulospedidomodificar.php?cod_articulospedido=" . $datos["cod_articulospedido"] . "'>&#128221;</a></td>";
-                                            echo "<td><a href='articulospedidoeliminar.php?cod_articulospedido=" . $datos["cod_articulospedido"] . "'>&#10060;</a></td>";
                                             echo "</tr>";
                                         }
                                     } catch (PDOException $e) {
@@ -197,7 +183,7 @@ $mensajeExito = isset($_GET['mensaje']) && $_GET['mensaje'] === 'exito';
                         </div>
                     </form>
                     <h3>Tabla de Pedidos Realizados</h3>
-                    <form action="registropedidos.php" method="get">
+                    <form action="consultapedidossocio.php" method="get">
                         <div class="table-responsive">
                             <table class="table table-hover table-dark">
                                 <thead>
@@ -209,32 +195,15 @@ $mensajeExito = isset($_GET['mensaje']) && $_GET['mensaje'] === 'exito';
                                         <th scope="col">Fecha de Pedido</th>
                                         <th scope="col">Fecha de entrega</th>
                                         <th scope="col">Total</th>
-                                        <th scope="col">Admin</th>
-                                        <th scope="col">Socio</th>
-                                        <th scope="col">Modificar</th>
-                                        <th scope="col">Borrar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
                                     <?php
-                                    //Controla si se ha iniciado la sesión anteriormente
-                                    if (session_status() == PHP_SESSION_NONE) {
-                                        session_start();
-                                    }
-
-                                    $conn = conectar_DB();
-
-                                    if (!$conn) {
-                                        die("Error al conectar a la base de datos");
-                                    }
                                     try {
-                                        // Consulta para obtener los clientes
-                                    
-                                        $stmt = $conn->prepare("SELECT ap.*, u.admin, u.socio
-                                        FROM pedidos ap
-                                        JOIN usuarios u ON ap.cod_usuario = u.dni
-                                        ");
+                                        // Consulta para obtener los pedidos realizados por el usuario actual
+                                        $stmt = $conn->prepare("SELECT * FROM pedidos WHERE cod_usuario = :dni");
+                                        $stmt->bindParam(':dni', $dni);
                                         $stmt->execute();
 
                                         while ($datos = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -246,13 +215,6 @@ $mensajeExito = isset($_GET['mensaje']) && $_GET['mensaje'] === 'exito';
                                             echo "<td>" . $datos["fecha_pedido"] . "</td>";
                                             echo "<td>" . $datos["fecha_envio"] . "</td>";
                                             echo "<td>" . $datos["total"] . "</td>";
-                                            // Obtener si o no como respuesta de los campos admin y socio
-                                            $adminText = ($datos["admin"] == 1) ? 'Sí' : 'No';
-                                            $socioText = ($datos["socio"] == 1) ? 'Sí' : 'No';
-                                            echo "<td>" . $adminText . "</td>";
-                                            echo "<td>" . $socioText . "</td>";
-                                            echo "<td><a href='pedidomodificar.php?cod_pedido=" . $datos["cod_pedido"] . "'>&#128221;</a></td>";
-                                            echo "<td><a href='pedidoeliminar.php?cod_pedido=" . $datos["cod_pedido"] . "'>&#10060;</a></td>";
                                             echo "</tr>";
                                         }
                                     } catch (PDOException $e) {
@@ -284,7 +246,7 @@ $mensajeExito = isset($_GET['mensaje']) && $_GET['mensaje'] === 'exito';
             <script>
                 //Uso de funciones para redirigir a diferentes formularios con botones
                 function verUsuario() {
-                    window.location.href = "sesionadmin.php?dni=";
+                    window.location.href = "sesionsocio.php?dni=";
                 }
                 function logout() {
                     window.location.href = "logout.php";

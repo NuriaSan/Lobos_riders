@@ -151,6 +151,7 @@ if (isset($_SESSION["usuario"])) {
                                             fecha_envio = :fecha_envio, 
                                             total = :total
                                         WHERE cod_pedido = :cod_pedido");
+                                    $stmt->bindParam(':cod_pedido', $cod_pedido);    
                                     $stmt->bindParam(':cod_usuario', $cod_usuario);
                                     $stmt->bindParam(':estatus', $estatus);
                                     $stmt->bindParam(':pago', $pago);

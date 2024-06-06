@@ -99,6 +99,7 @@ if (isset($_SESSION["usuario"])) {
                                     $articulo = $stmt->fetch(PDO::FETCH_ASSOC);
 
                                     if ($articulo) {
+                                        
                                         ?>
                                         <form id="formulariomodificar" method="POST" action="">
                                             <div class="mb-3">

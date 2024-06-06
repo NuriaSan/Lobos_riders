@@ -129,8 +129,9 @@ $mensajeExito = isset($_GET['mensaje']) && $_GET['mensaje'] === 'exito';
 
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
-                    <li><a href="eliminarusuario.php">Eliminar Datos</a></li>
-                    <li><a href="modificarusuario.php">Modificar Usuario</a></li>
+                    <li><a href="modificarsocio.php" >Modificar Usuario</a></li>
+                    <li><a href="peticionmerchandisingsocio.php">Solicitar Merchandising</a></li>
+                    <li><a href="consultapedidossocio.php">Ver Pedidos</a></li>
                 </ul>
 
             </nav>
@@ -236,7 +237,7 @@ $mensajeExito = isset($_GET['mensaje']) && $_GET['mensaje'] === 'exito';
         <div class="row align-items-center">
             <div class="col-md-12 mt-5 mb-5 text-center align-self-center">
                 <button class="get-started-btn scrollto" style="color: black;"
-                    onclick="window.location.href='sesionusuario.php'">
+                    onclick="window.location.href='sesionsocio.php'">
                     Ir a la página de usuario
                 </button>
             </div>

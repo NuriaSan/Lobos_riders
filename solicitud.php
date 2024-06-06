@@ -51,12 +51,14 @@ if (isset($_SESSION['carrito'])) {
                     class="img-fluid"></a>
             <h1 class="logo me-auto me-lg-0"><a href="index.html"><span>L</span>obos <span>R</span>iders
                     M.G<span>.</span></a></h1>
-            <nav id="navbar" class="navbar order-last order-lg-0">
+                    <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
-                    <li><a href="eliminarusuario.php">Eliminar Datos</a></li>
-                    <li><a href="modificarusuario.php">Modificar Usuario</a></li>
+                    <li><a href="eliminarusuario.php" >Eliminar Datos</a></li>
+                    <li><a href="modificarusuario.php" >Modificar Usuario</a></li>
                     <li><a href="peticionmerchandising.php">Solicitar Merchandising</a></li>
+                    <li><a href="consultapedidosusuario.php">Consultar pedidos</a></li>
                 </ul>
+
             </nav>
             <a href="logout.php" class="get-started-btn scrollto">Log Out</a>
         </div>
@@ -96,68 +98,72 @@ if (isset($_SESSION['carrito'])) {
                                 Debes iniciar sesión para completar la compra.
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>';
-                            }?>
+                            } ?>
                             <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Producto</th>
-                                    <th>Precio</th>
-                                    <th class="text-center">Cantidad</th>
-                                    
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $precio_total = 0;
-                                $total_articulos = count($_SESSION['carrito']);
-                                foreach ($_SESSION['carrito'] as $articulo) {
-                                    // Mostrar cada artículo en la tabla
-                                    $codigo_articulo = $articulo->getCod_articulo();
-                                    $nombre = $articulo->getNombre();
-                                    $precio = $articulo->getPrecio();
-                                    $cantidad = 1;
-                                    $subtotal = $precio * $cantidad;
-                                    $precio_total += $subtotal;
-                                    echo '<tr>
-                                        <td>'.$nombre.'</td>
-                                        <td>'.$precio.' €</td>
-                                        <td class="text-center"> '.$cantidad.'</td>
+                                <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>Precio</th>
+                                        <th class="text-center">Cantidad</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $precio_total = 0;
+                                    $total_articulos = count($_SESSION['carrito']);
+                                    foreach ($_SESSION['carrito'] as $articulo) {
+                                        // Mostrar cada artículo en la tabla
+                                        $codigo_articulo = $articulo->getCod_articulo();
+                                        $nombre = $articulo->getNombre();
+                                        $precio = $articulo->getPrecio();
+                                        $cantidad = 1;
+                                        $subtotal = $precio * $cantidad;
+                                        $precio_total += $subtotal;
+                                        echo '<tr>
+                                        <td>' . $nombre . '</td>
+                                        <td>' . $precio . ' €</td>
+                                        <td class="text-center"> ' . $cantidad . '</td>
                                         
                                     </tr>';
-                                }
-                                ?>
+                                    }
+                                    ?>
                                     <tr>
-                                        <td colspan="2"><h3>Total de Artículos: <?php echo $total_articulos; ?></h3></td>
-                                        <td><h2>Total <?php echo $precio_total.' €'; ?></h2></td>
-                                        
+                                        <td colspan="2">
+                                            <h3>Total de Artículos: <?php echo $total_articulos; ?></h3>
+                                        </td>
+                                        <td>
+                                            <h2>Total <?php echo $precio_total . ' €'; ?></h2>
+                                        </td>
+
                                     </tr>
                                 </tbody>
                             </table>
                             <div class="shipAddr">
-                                
+
                                 <?php
-                                    if (isset($_SESSION["usuario"])) {
-                                        $usuario = $_SESSION["usuario"]->getUsuario();
-                                        //Sesion usuario
-                                        // Utilizar la clase Usuario para obtener el DNI del usuario
-                                            $dni = Usuario::obtenerDniPorUsuario($usuario);
-                                        
-                                            // Verificar si se obtuvo el DNI
-                                            if ($dni) {
-                                                // Utilizar la clase Usuario para obtener el objeto Usuario correspondiente al DNI
-                                                $usuarioSesion = Usuario::obtenerUsuarioPorDNI($dni);
-                                        
-                                                // Verificar si se obtuvo un objeto Usuario
-                                                if ($usuarioSesion) {
-                                                    // Obtener los valores del objeto Usuario
-                                                    $dni = $usuarioSesion->getDni();
-                                                    $usuario = $usuarioSesion->getUsuario();
-                                                    $nombre = $usuarioSesion->getNombre();
-                                                    $telefono = $usuarioSesion->getTelefono();
-                                                    $email = $usuarioSesion->getEmail();
-                                                    $password = $usuarioSesion->getPassword();
-                                                    echo '<h4>Datos del usuario '.$usuario.':</h4>';
-                                                    echo '<table class="table">
+                                if (isset($_SESSION["usuario"])) {
+                                    $usuario = $_SESSION["usuario"]->getUsuario();
+                                    //Sesion usuario
+                                    // Utilizar la clase Usuario para obtener el DNI del usuario
+                                    $dni = Usuario::obtenerDniPorUsuario($usuario);
+
+                                    // Verificar si se obtuvo el DNI
+                                    if ($dni) {
+                                        // Utilizar la clase Usuario para obtener el objeto Usuario correspondiente al DNI
+                                        $usuarioSesion = Usuario::obtenerUsuarioPorDNI($dni);
+
+                                        // Verificar si se obtuvo un objeto Usuario
+                                        if ($usuarioSesion) {
+                                            // Obtener los valores del objeto Usuario
+                                            $dni = $usuarioSesion->getDni();
+                                            $usuario = $usuarioSesion->getUsuario();
+                                            $nombre = $usuarioSesion->getNombre();
+                                            $telefono = $usuarioSesion->getTelefono();
+                                            $email = $usuarioSesion->getEmail();
+                                            $password = $usuarioSesion->getPassword();
+                                            echo '<h4>Datos del usuario ' . $usuario . ':</h4>';
+                                            echo '<table class="table">
                                                             <thead>
                                                                 <tr>
                                                                     <th>Nombre</th>
@@ -166,120 +172,111 @@ if (isset($_SESSION['carrito'])) {
                                                                 </tr>
                                                             </thead>
                                                             <tbody>';
-                                                            echo '<tr>';
-                                                            echo '<td>'. $nombre.'</td>';
-                                                            echo '<td>'. $telefono.'</td>';
-                                                            echo '<td>'. $email.'</td>';
-                                                            echo '</tr>';
-                                                    echo '</table>';
+                                            echo '<tr>';
+                                            echo '<td>' . $nombre . '</td>';
+                                            echo '<td>' . $telefono . '</td>';
+                                            echo '<td>' . $email . '</td>';
+                                            echo '</tr>';
+                                            echo '</table>';
 
-                                                        $cod_pedido ="COD-".date('YmdHis');
-                                                        $cod_usuario = $dni;
-                                                        $estatus = "en proceso";
-                                                        $pago = "Pendiente";
-                                                        $fecha_pedido = date("Y-m-d");
-                                                        $fecha_envio = "Pendiente";
-                                                        $total = $precio_total;
-                                                        
-                                                        // Insertar en la tabla sólo si no existe un pedido en proceso para el usuario
-                                                        $conn = conectar_DB();
-                                                        $stmt = $conn->prepare("SELECT * FROM pedidos WHERE cod_usuario = ? AND estatus = 'en proceso'");
-                                                        $stmt->bindParam(1, $cod_usuario, PDO::PARAM_STR);
-                                                        $stmt->execute();
-                                                        
-                                                        if ($stmt->rowCount() == 0) {
-                                                            $sql = "INSERT INTO pedidos (cod_pedido, cod_usuario, estatus, pago, fecha_pedido, fecha_envio, total) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                                            $cod_pedido = "COD-" . date('YmdHis');
+                                            $cod_usuario = $dni;
+                                            $estatus = "en proceso";
+                                            $pago = "Pendiente";
+                                            $fecha_pedido = date("Y-m-d");
+                                            $fecha_envio = "Pendiente";
+                                            $total = $precio_total;
 
-                                                            // Preparar la declaración
-                                                            $stmt = $conn->prepare($sql);
+                                            // // Insertar en la tabla sólo si no existe un pedido en proceso para el usuario
+                                            $conn = conectar_DB();
+                                            // $stmt = $conn->prepare("SELECT * FROM pedidos WHERE cod_usuario = :cod_usuario AND estatus = 'en proceso'");
+                                            // $stmt->bindValue(':cod_usuario', $cod_usuario, PDO::PARAM_STR);
+                                            // $stmt->execute();
+                                
+                                            // $num_rows = $stmt->fetchColumn();
+                                
+                                            if ($conn) {
+                                                // Insertar un nuevo pedido sin verificar si existe uno en proceso
+                                                $sql = "INSERT INTO pedidos (cod_pedido, cod_usuario, estatus, pago, fecha_pedido, fecha_envio, total) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-                                                            // Enlazar parámetros
-                                                            $stmt->bindParam(1, $cod_pedido, PDO::PARAM_STR);
-                                                            $stmt->bindParam(2, $cod_usuario, PDO::PARAM_STR);
-                                                            $stmt->bindParam(3, $estatus, PDO::PARAM_STR);
-                                                            $stmt->bindParam(4, $pago, PDO::PARAM_STR);
-                                                            $stmt->bindParam(5, $fecha_pedido, PDO::PARAM_STR);
-                                                            $stmt->bindParam(6, $fecha_envio, PDO::PARAM_STR); 
-                                                            $stmt->bindParam(7, $total, PDO::PARAM_STR);
+                                                // Preparar la declaración
+                                                $stmt = $conn->prepare($sql);
 
-                                                            $stmt->execute();
-                                                        } else {
-                                                            // Si ya existe un pedido en proceso, mostrar los datos del pedido existente
-                                                            $pedido = $stmt->fetch(PDO::FETCH_ASSOC);
-                                                            echo '<div style="color: red; text-align: center; font-size: 20px; margin-top: 20px;">Tienes registrada una solicitud en proceso.</div>';
-                                                            echo '<h4>Detalles del pedido en proceso:</h4>';
-                                                            echo '<table class="table">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Código Pedido</th>
-                                                                            <th>Fecha Pedido</th>
-                                                                            <th>Total</th>
-                                                                            <th>Estatus</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>';
-                                                                    echo '<tr>';
-                                                                    echo '<td>'. $pedido['cod_pedido'].'</td>';
-                                                                    echo '<td>'. $pedido['fecha_pedido'].'</td>';
-                                                                    echo '<td>'. $pedido['total'].' €</td>';
-                                                                    echo '<td>'. $pedido['estatus'].'</td>';
-                                                                    echo '</tr>';
-                                                            echo '</table>';
-                                                        }
-                                                        
-                                                        $conn = null;
-                                                        unset($_SESSION['carrito']);
+                                                // Enlazar parámetros
+                                                $stmt->bindParam(1, $cod_pedido, PDO::PARAM_STR);
+                                                $stmt->bindParam(2, $cod_usuario, PDO::PARAM_STR);
+                                                $stmt->bindParam(3, $estatus, PDO::PARAM_STR);
+                                                $stmt->bindParam(4, $pago, PDO::PARAM_STR);
+                                                $stmt->bindParam(5, $fecha_pedido, PDO::PARAM_STR);
+                                                $stmt->bindParam(6, $fecha_envio, PDO::PARAM_STR);
+                                                $stmt->bindParam(7, $total, PDO::PARAM_STR);
 
+                                                // Ejecutar la consulta
+                                                if ($stmt->execute()) {
+                                                    echo "¡Pedido registrado correctamente!";
+                                                    // Aquí puedes realizar otras acciones después de la inserción exitosa, si es necesario
                                                 } else {
-                                                    // Resultado en el caso en que no se encuentre el usuario
-                                                    echo '<div style="color: red; text-align: center; font-size: 30px; margin-top: 50px;">No se ha podido obtener el usuario</div>';
-                                                    exit();
+                                                    echo "Error al registrar el pedido.";
                                                 }
+
+                                                // Cerrar la conexión
+                                                $conn = null;
                                             } else {
-                                                // Resultado si no se haya obtenido el DNI
-                                                echo '<div style="color: red; text-align: center; font-size: 30px; margin-top: 50px;">Error: No se pudo obtener el DNI.</div>';
-                                                exit();
+                                                echo "Error al conectar con la base de datos.";
                                             }
-                                            
+                                            unset($_SESSION['carrito']);
+
                                         } else {
-                                        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            // Resultado en el caso en que no se encuentre el usuario
+                                            echo '<div style="color: red; text-align: center; font-size: 30px; margin-top: 50px;">No se ha podido obtener el usuario</div>';
+                                            exit();
+                                        }
+                                    } else {
+                                        // Resultado si no se haya obtenido el DNI
+                                        echo '<div style="color: red; text-align: center; font-size: 30px; margin-top: 50px;">Error: No se pudo obtener el DNI.</div>';
+                                        exit();
+                                    }
+
+                                } else {
+                                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                                         No puedes obtener los datos del envio ni procesar el pedido.
                                         Para realizar todas estas acciones deberás registrarte.
                                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                         </div>';
-                                        echo '
+                                    echo '
                                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                             Debes iniciar sesión para completar el pedido.
                                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                             <a href="login.php" class="btn btn-secondary">Iniciar Sesión</a>
                                         </div>';
-                                }?>
-                                
+                                } ?>
+
                             </div>
                             <div class="footBtn">
-        <?php
-        // Verificar si existe un pedido en proceso para el usuario
-        if (isset($_SESSION["usuario"])) {
-            $usuario = $_SESSION["usuario"]->getUsuario();
-            $dni = Usuario::obtenerDniPorUsuario($usuario);
-            if ($dni) {
-                $conn = conectar_DB();
-                $stmt = $conn->prepare("SELECT * FROM pedidos WHERE cod_usuario = ? AND estatus = 'en proceso'");
-                $stmt->bindParam(1, $dni, PDO::PARAM_STR);
-                $stmt->execute();
-                
-                // Si existe un pedido en proceso, mostrar el botón para ir a sesionusuario.php
-                if ($stmt->rowCount() > 0) {
-                    echo '<a href="ordenexito.php?action=placeOrder&cod_pedido=<?php echo $cod_pedido; ?>" class="btn btn-secondary m-4">Visualizar la Solicitud<i class="glyphicon glyphicon-menu-right"></i></a>';
-                    echo '<a href="sesionusuario.php" class="btn btn-dark">Ir a la sesión de Usuario</a>';
-                } else {
-                    // Si no existe un pedido en proceso, mostrar los botones normales
-                    echo '<a href="peticionmerchandising.php" class="btn btn-secondary"><i class="glyphicon glyphicon-menu-left"></i> Continuar Comprando</a>';
-                }
-            }
-        }
-        ?>
-    </div>
+                                <?php
+                                // Verificar si existe un pedido en proceso para el usuario
+                                if (isset($_SESSION["usuario"])) {
+                                    $usuario = $_SESSION["usuario"]->getUsuario();
+                                    $dni = Usuario::obtenerDniPorUsuario($usuario);
+                                    if ($dni) {
+                                        $conn = conectar_DB();
+                                        $stmt = $conn->prepare("SELECT * FROM pedidos WHERE cod_usuario = ? AND estatus = 'en proceso'");
+                                        $stmt->bindParam(1, $dni, PDO::PARAM_STR);
+                                        $stmt->execute();
+
+                                        // Si existe un pedido en proceso, mostrar el botón para ir a sesionusuario.php
+                                        if ($stmt->rowCount() > 0) {
+                                            echo '<a href="ordenexito.php?action=placeOrder&cod_pedido=' . $cod_pedido . '" class="btn btn-secondary m-4">Visualizar la Solicitud<i class="glyphicon glyphicon-menu-right"></i></a>';
+
+                                            echo '<a href="sesionusuario.php" class="btn btn-dark">Ir a la sesión de Usuario</a>';
+                                        } else {
+                                            // Si no existe un pedido en proceso, mostrar los botones normales
+                                            echo '<a href="peticionmerchandising.php" class="btn btn-secondary"><i class="glyphicon glyphicon-menu-left"></i> Continuar Comprando</a>';
+                                        }
+                                    }
+                                }
+                                ?>
+                            </div>
                         </div>
                     </div>
                 </div>

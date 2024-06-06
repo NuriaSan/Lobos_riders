@@ -39,11 +39,13 @@ include ("seguridad.php");
                     class="img-fluid"></a>
             <h1 class="logo me-auto me-lg-0"><a href="index.html"><span>L</span>obos <span>R</span>iders
                     M.G<span>.</span></a></h1>
-            <nav id="navbar" class="navbar order-last order-lg-0">
+                    <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
-                    <li><a href="modificarusuariosocio.php">Modificar Usuario</a></li>
+                    <li><a href="modificarsocio.php" >Modificar Usuario</a></li>
                     <li><a href="peticionmerchandisingsocio.php">Solicitar Merchandising</a></li>
+                    <li><a href="consultapedidossocio.php">Consultar pedidos</a></li>
                 </ul>
+
             </nav>
             <a href="logout.php" class="get-started-btn scrollto">Log Out</a>
         </div>
@@ -63,9 +65,9 @@ include ("seguridad.php");
                                 $usuario = $_SESSION["usuario"]->getUsuario();
                             } else {
                                 echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                        Debes iniciar sesión para completar la compra.
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                        </div>';
+                                    Debes iniciar sesión para completar la compra.
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>';
                             } ?>
 
                             <div class="row justify-content-center">
@@ -77,25 +79,24 @@ include ("seguridad.php");
                                                     <div class="col-lg-10 m-auto mb-3">
                                                         <h2>Estado de su Orden</h2>
                                                         <p>Su pedido ha sido enviado exitosamente. El ID del pedido es
-                                                            #<?php echo $_GET['cod_pedido']; ?></p>
+                                                            <?php echo $_GET['cod_pedido']; ?></p>
                                                     </div>
                                                     <div class="col-lg-10 m-auto m-3">
                                                         <h3>Info:</h3>
-                                                        <p>Se ha registrado correctamente tu solicitud de Merchandising.
-                                                        </p>
+                                                        <p>Grácias por interesarte en nuestros diseños, cuando volvamos
+                                                            a hacer Merchandising para los miembros del club nos
+                                                            pondremos en contacto contigo con los datos que nos has
+                                                            proporcionado. </p>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div id="salir" class="mb-3">
-                                                <button class="btn btn-dark w-100" type="button"
-                                                    onclick="volver()">Volver a la Sesión</button>
-                                            </div>
+                                                <div id="salir" class="mb-3">
+                                                    <button class="btn btn-dark w-100" type="button"
+                                                        onclick="volver()">Volver a la Sesión</button>
+                                                </div>
                                         </section>
                                         <script>
-                                            //Uso de funciones para redirigir a diferentes formularios con botones
-
                                             function volver() {
-                                                window.location.href = "vercartasocios.php";
+                                                window.location.href = "sesionsocio.php";
                                             }
                                         </script>
                                     </div>

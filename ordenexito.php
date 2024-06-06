@@ -39,12 +39,14 @@ include ("seguridad.php");
                     class="img-fluid"></a>
             <h1 class="logo me-auto me-lg-0"><a href="index.html"><span>L</span>obos <span>R</span>iders
                     M.G<span>.</span></a></h1>
-            <nav id="navbar" class="navbar order-last order-lg-0">
+                    <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
-                    <li><a href="eliminarusuario.php">Eliminar Datos</a></li>
-                    <li><a href="modificarusuario.php">Modificar Usuario</a></li>
+                    <li><a href="eliminarusuario.php" >Eliminar Datos</a></li>
+                    <li><a href="modificarusuario.php" >Modificar Usuario</a></li>
                     <li><a href="peticionmerchandising.php">Solicitar Merchandising</a></li>
+                    <li><a href="consultapedidosusuario.php">Consultar pedidos</a></li>
                 </ul>
+
             </nav>
             <a href="logout.php" class="get-started-btn scrollto">Log Out</a>
         </div>
@@ -78,7 +80,7 @@ include ("seguridad.php");
                                                     <div class="col-lg-10 m-auto mb-3">
                                                         <h2>Estado de su Orden</h2>
                                                         <p>Su pedido ha sido enviado exitosamente. El ID del pedido es
-                                                            #<?php echo $_GET['cod_pedido']; ?></p>
+                                                            <?php echo $_GET['cod_pedido']; ?></p>
                                                     </div>
                                                     <div class="col-lg-10 m-auto m-3">
                                                         <h3>Info:</h3>
@@ -94,10 +96,8 @@ include ("seguridad.php");
                                                 </div>
                                         </section>
                                         <script>
-                                            //Uso de funciones para redirigir a diferentes formularios con botones
-
                                             function volver() {
-                                                window.location.href = "vercarta.php";
+                                                window.location.href = "sesionusuario.php";
                                             }
                                         </script>
                                     </div>

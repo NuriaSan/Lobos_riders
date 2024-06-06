@@ -103,6 +103,7 @@ $mensajeExito = isset($_GET['mensaje']) && $_GET['mensaje'] === 'exito';
                     <li><a href="eliminarusuario.php" >Eliminar Datos</a></li>
                     <li><a href="modificarusuario.php" >Modificar Usuario</a></li>
                     <li><a href="peticionmerchandising.php">Solicitar Merchandising</a></li>
+                    <li><a href="consultapedidosusuario.php">Consultar pedidos</a></li>
                 </ul>
 
             </nav>
