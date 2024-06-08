@@ -427,7 +427,7 @@ h6 {
 #cabecera {
   width: 100%;
   min-height: 100vh;
-  background: url("../img/Fotos_Lobos/paisaje\ luna\ naturaleza.jpg") top center;
+  background: url("../img/Fotos_Lobos/paisaje\ luna\ naturaleza.webp") top center;
   background-size: cover;
   position: relative;
 }
@@ -774,7 +774,7 @@ h6 {
 #cabecera-usuario {
   width: 100%;
   min-height: 100vh;
-  background: url("../img/Fotos_Lobos/lobo\ con\ fondo\ luna.jpg") top center;
+  background: url("../img/Fotos_Lobos/lobo\ con\ fondo\ luna.webp") top center;
   background-size: cover;
   position: relative;
 }
@@ -1108,7 +1108,7 @@ section {
 # Quienes Somos
 --------------------------------------------------------------*/
 .qsomos {
-  background: linear-gradient(rgba(2, 2, 2, 0.5), rgba(0, 0, 0, 0.5)), url("../img/Fotos_Lobos/paisaje\ luna\ naturaleza.jpg") fixed center center;
+  background: linear-gradient(rgba(2, 2, 2, 0.5), rgba(0, 0, 0, 0.5)), url("../img/Fotos_Lobos/paisaje\ luna\ naturaleza.webp") fixed center center;
   background-size: cover;
   padding: 60px 0;
 }
@@ -1517,7 +1517,7 @@ section {
 }
 
 .datos .image {
-  background: url("../img/Fotos_Lobos/PHOTO-4-bn.jpg") center center no-repeat;
+  background: url("../img/Fotos_Lobos/PHOTO-4-bn.webp") center center no-repeat;
   background-size: cover;
   min-height: 400px;
 }
@@ -1543,7 +1543,7 @@ section {
 --------------------------------------------------------------*/
 .opiniones {
   padding: 80px 0;
-  background: url("../img/Fotos_Lobos/lobo\ con\ fondo\ luna.jpg") no-repeat;
+  background: url("../img/Fotos_Lobos/luna.webp") no-repeat;
   background-position: center center;
   background-size: cover;
   position: relative;
