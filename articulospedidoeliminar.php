@@ -53,10 +53,12 @@ $mensajeEliminado = isset($_GET['mensaje']) && $_GET['mensaje'] === 'eliminado';
                         <div class="card-body">
                             <h2 class="card-title text-center">Estas son las acciones disponibles:</h2>
                             <?php
-                            if (isset($_GET["cod_articulospedido"])) {
+                            if (isset($_GET["cod_articulo"])) {
+                                $cod_articulo = $_GET["cod_articulo"];
                                 $cod_articulospedido = $_GET["cod_articulospedido"];
-                                $articulo = Articulo::obtenerArticuloPorCodigo($cod_articulospedido);
-
+                                
+                                $articulo = Articulo::obtenerArticuloPorCodigo($cod_articulo);
+                                #echo $cod_articulo;
                                 if ($articulo) {
                                     echo "<body style='text-align:center; display:block; justify-content: center; align-items: center;'>";
                                     echo "<h2 style='font-size: 35px;'>Confirmar Eliminación</h2>";
@@ -71,7 +73,7 @@ $mensajeEliminado = isset($_GET['mensaje']) && $_GET['mensaje'] === 'eliminado';
                                             <th style='background-color:grey; font-size: 16px; height: 30px;'>Categoria</th>
                                             <th style='background-color:grey; font-size: 16px; height: 30px;'>Precio</th>
                                             <th style='background-color:grey; font-size: 16px; height: 30px;'>Imagen Ruta</th>
-                                            <th style='background-color:grey; font-size: 16px; height: 30px;'>Imagen</th>
+                                            <th style='background-color:grey; font-size: 16px; '>Imagen</th>
                                         </tr>";
                                     echo "<tr>";
                                     echo "<td style='background-color:white; font-size: 16px; height: 30px;'>{$cod_articulospedido}</td>";
@@ -80,7 +82,7 @@ $mensajeEliminado = isset($_GET['mensaje']) && $_GET['mensaje'] === 'eliminado';
                                     echo "<td style='background-color:white; font-size: 16px; height: 30px;'>{$articulo->getDescripcion()}</td>";
                                     echo "<td style='background-color:white; font-size: 16px; height: 30px;'>{$articulo->getCategoria()}</td>";
                                     echo "<td style='background-color:white; font-size: 16px; height: 30px;'>{$articulo->getPrecio()}</td>";
-                                    echo "<td style='background-color:white; font-size: 16px; height: 30px;'>{$articulo->getImagen()}</td>";
+                                    echo "<td style='background-color:white; font-size: 16px; '>{$articulo->getImagen()}</td>";
                                     echo "<td style='background-color:white; font-size: 16px; padding:15px; margin:15px;'>
                                             <img src='" . $articulo->getImagen() . "' alt='imagen' style='width: 250px; height: 250px; margin:0; padding: 0;'>";
                                     echo "</tr>";

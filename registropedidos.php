@@ -184,7 +184,7 @@ $mensajeExito = isset($_GET['mensaje']) && $_GET['mensaje'] === 'exito';
                                             echo "<td>" . $adminText . "</td>";
                                             echo "<td>" . $socioText . "</td>";
                                             echo "<td><a href='articulospedidomodificar.php?cod_articulospedido=" . $datos["cod_articulospedido"] . "'>&#128221;</a></td>";
-                                            echo "<td><a href='articulospedidoeliminar.php?cod_articulospedido=" . $datos["cod_articulospedido"] . "'>&#10060;</a></td>";
+                                            echo "<td><a href='articulospedidoeliminar.php?cod_articulo=" . $datos["cod_articulo"] . "&cod_articulospedido=" . $datos["cod_articulospedido"] . "'>&#10060;</a></td>";
                                             echo "</tr>";
                                         }
                                     } catch (PDOException $e) {
