@@ -77,14 +77,14 @@ $mensajeEliminado = isset($_GET['mensaje']) && $_GET['mensaje'] === 'eliminado';
                                         </tr>";
                                     echo "<tr>";
                                     echo "<td style='background-color:white; font-size: 16px; height: 30px;'>{$cod_articulospedido}</td>";
-                                    echo "<td style='background-color:white; font-size: 16px; height: 30px;'>{$articulo->getCod_articulo()}</td>";
+                                    echo "<td style='background-color:white; font-size: 16px; height: 30px;'>{$cod_articulo}</td>";
                                     echo "<td style='background-color:white; font-size: 16px; height: 30px;'>{$articulo->getNombre()}</td>";
                                     echo "<td style='background-color:white; font-size: 16px; height: 30px;'>{$articulo->getDescripcion()}</td>";
                                     echo "<td style='background-color:white; font-size: 16px; height: 30px;'>{$articulo->getCategoria()}</td>";
                                     echo "<td style='background-color:white; font-size: 16px; height: 30px;'>{$articulo->getPrecio()}</td>";
                                     echo "<td style='background-color:white; font-size: 16px; '>{$articulo->getImagen()}</td>";
                                     echo "<td style='background-color:white; font-size: 16px; padding:15px; margin:15px;'>
-                                            <img src='" . $articulo->getImagen() . "' alt='imagen' style='width: 250px; height: 250px; margin:0; padding: 0;'>";
+                                            <img src='" . $articulo->getImagen() . "' alt='imagen' style='width: 250px; height: 100px; margin:0; padding: 0;'>";
                                     echo "</tr>";
                                     echo "</table>";
                                     echo "</div>";
