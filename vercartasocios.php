@@ -104,9 +104,9 @@ if (isset($_SESSION['carrito'])) {
                                             <tr>
                                                 <th>Producto</th>
                                                 <th>Precio</th>
-                                                <th>Talla</th>
-                                                <th>Género</th>
-                                                <th>Tipo de Prenda</th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
                                                 <th class="text-center">Acción</th>
                                             </tr>
                                         </thead>
@@ -131,8 +131,8 @@ if (isset($_SESSION['carrito'])) {
                                                     $_SESSION['carrito'][] = $articulo;
 
 
-                                                    if ($codigo_articulo) {
-                                                        $articulo = Articulo::obtenerArticuloPorCodigo($codigo_articulo);
+                                                    if ($cod_articulo) {
+                                                        $articulo = Articulo::obtenerArticuloPorCodigo($cod_articulo);
 
                                                         $nombre = $articulo->getNombre();
                                                         $precio = $articulo->getPrecio();
@@ -149,8 +149,8 @@ if (isset($_SESSION['carrito'])) {
 
                                                                 // Insertar los artículos en la tabla articulos_pedido
                                                                 $fecha_creacion = date('Y-m-d H:i:s');
-                                                                $codigo_articulo;
-                                                                $cod_articulospedido = $fecha_creacion . "-" . $codigo_articulo;
+                                                                $cod_articulo;
+                                                                $cod_articulospedido = $fecha_creacion . "-" . $cod_articulo;
                                                                 $nombre = $articulo->getNombre();
                                                                 $precio = $articulo->getPrecio();
                                                                 $talla = isset($_GET['talla']) ? $_GET['talla'] : '';
@@ -200,18 +200,18 @@ if (isset($_SESSION['carrito'])) {
                                                     $cod_articulospedido = $articulo->getCod_articulo();
                                                     $nombre = $articulo->getNombre();
                                                     $precio = $articulo->getPrecio();
-                                                    $talla = isset($_GET['talla']) ? $_GET['talla'] : '';
-                                                    $genero = isset($_GET['genero']) ? $_GET['genero'] : '';
-                                                    $tipo_prenda = isset($_GET['tipo_prenda']) ? $_GET['tipo_prenda'] : '';
+                                                    // $talla = isset($_GET['talla']) ? $_GET['talla'] : '';
+                                                    // $genero = isset($_GET['genero']) ? $_GET['genero'] : '';
+                                                    // $tipo_prenda = isset($_GET['tipo_prenda']) ? $_GET['tipo_prenda'] : '';
                                                     $cantidad = 1;
                                                     $subtotal = $precio * $cantidad;
                                                     $precio_total += $subtotal;
                                                     echo '<tr>
                                                         <td>' . $nombre . '</td>
                                                         <td>' . $precio . ' €</td>
-                                                        <td>' . $talla . '</td>
-                                                        <td class="text-center"> ' . $genero . '</td>
-                                                        <td class="text-center"> ' . $tipo_prenda . '</td>
+                                                        <td></td>
+                                                        <td class="text-center"> </td>
+                                                        <td class="text-center"> </td>
                                                         <td class="text-center">';
                                                     if (empty($datos_pedido)) {
                                                         echo '<a href="accioncarrito.php?action=removeCartItem&nombre=' . $nombre . '&cod_articulospedido=' . $cod_articulospedido . '" class="btn btn-danger" onclick="return confirm(\'¿Esta seguro de eliminar el articulo?\')">Eliminar<i class="glyphicon glyphicon-trash"></i></a>';

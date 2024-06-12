@@ -53,7 +53,7 @@ if (isset($_SESSION['carrito'])) {
                 <ul>
                     <li><a href="eliminarusuario.php" >Eliminar Datos</a></li>
                     <li><a href="modificarusuario.php" >Modificar Usuario</a></li>
-                    <li><a href="peticionmerchandising.php">Solicitar Merchandising</a></li>
+                    <li><a href="peticionmerchandisingusuario.php">Solicitar Merchandising</a></li>
                     <li><a href="consultapedidosusuario.php">Consultar pedidos</a></li>
                 </ul>
 
@@ -107,9 +107,9 @@ if (isset($_SESSION['carrito'])) {
                                             <tr>
                                                 <th>Producto</th>
                                                 <th>Precio</th>
-                                                <th>Talla</th>
-                                                <th>Género</th>
-                                                <th>Tipo de Prenda</th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
                                                 <th class="text-center">Acción</th>
                                             </tr>
                                         </thead>
@@ -203,18 +203,18 @@ if (isset($_SESSION['carrito'])) {
                                                     $cod_articulospedido = $articulo->getCod_articulo();
                                                     $nombre = $articulo->getNombre();
                                                     $precio = $articulo->getPrecio();
-                                                    $talla = isset($_GET['talla']) ? $_GET['talla'] : '';
-                                                    $genero = isset($_GET['genero']) ? $_GET['genero'] : '';
-                                                    $tipo_prenda = isset($_GET['tipo_prenda']) ? $_GET['tipo_prenda'] : '';
+                                                    // $talla = isset($_GET['talla']) ? $_GET['talla'] : '';
+                                                    // $genero = isset($_GET['genero']) ? $_GET['genero'] : '';
+                                                    // $tipo_prenda = isset($_GET['tipo_prenda']) ? $_GET['tipo_prenda'] : '';
                                                     $cantidad = 1;
                                                     $subtotal = $precio * $cantidad;
                                                     $precio_total += $subtotal;
                                                     echo '<tr>
                                                         <td>' . $nombre . '</td>
                                                         <td>' . $precio . ' €</td>
-                                                        <td>' . $talla . '</td>
-                                                        <td class="text-center"> ' . $genero . '</td>
-                                                        <td class="text-center"> ' . $tipo_prenda . '</td>
+                                                        <td></td>
+                                                        <td class="text-center"> </td>
+                                                        <td class="text-center"> </td>
                                                         <td class="text-center">';
                                                     if (empty($datos_pedido)) {
                                                         echo '<a href="accioncarrito.php?action=removeCartItem&nombre=' . $nombre . '&cod_articulospedido=' . $cod_articulospedido . '" class="btn btn-danger" onclick="return confirm(\'¿Esta seguro de eliminar el articulo?\')">Eliminar<i class="glyphicon glyphicon-trash"></i></a>';
@@ -305,9 +305,9 @@ if (isset($_SESSION['carrito'])) {
                                 </div>
                                 <div class="panel-footer">
                                     <?php if (!empty($datos_pedido)) {
-                                        echo '<a href="peticionmerchandising.php" class="btn btn-secondary"><i class="glyphicon glyphicon-menu-left"></i> Volver a la Tienda</a>';
+                                        echo '<a href="peticionmerchandisingusuario.php" class="btn btn-secondary"><i class="glyphicon glyphicon-menu-left"></i> Volver a la Tienda</a>';
                                     } else {
-                                        echo '<a href="peticionmerchandising.php" class="btn btn-secondary"><i class="glyphicon glyphicon-menu-left"></i> Seguir Comprando</a>';
+                                        echo '<a href="peticionmerchandisingusuario.php" class="btn btn-secondary"><i class="glyphicon glyphicon-menu-left"></i> Seguir Comprando</a>';
                                     }
                                     ?>
                                 </div>
